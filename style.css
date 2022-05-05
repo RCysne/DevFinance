@@ -1,0 +1,338 @@
+/* ======== GLOBAL ======== */
+
+:root {
+  --dark-blue: #363f5f;
+  --green-back: #2d4a22;
+  --green: #49aa26;
+  --light-green: #3dd705;
+  --red: #e92929;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background: #f0f2f5;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  font-size: 93.75%; /* 100% é 16px por padrão, 93.75 é 15px */
+}
+
+/* A classe sr-only é para acessibilidade (screen reader). Desaparecendo com o elemento mas deixando aparente para o leitor */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border: 1px solid red;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.container {
+  /* Usando a função min() Ela recebe dois argumentos e mantem o menor de acordo com a visualização */
+  width: min(90vw, 800px);
+  margin: auto;
+}
+
+/* =======  HEADER ========= */
+
+header {
+  background: var(--green-back);
+  padding: 2rem 0 10rem;
+  text-align: center;
+}
+
+#logo {
+  color: #fff;
+  font-weight: 100;
+}
+
+/* ========== TITLES ========= */
+
+h2 {
+  margin-top: 3.2rem;
+  margin-bottom: 0.8rem;
+  color: var(--dark-blue);
+  font-weight: normal;
+}
+
+/* ========= LINKS AND BUTTONS ========= */
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--light-green);
+}
+
+/* Colocar junto significa a classe button e new juntos, separado é o new dentro do button */
+.button.new {
+  display: inline-block; /* Como o inline não pega margem, transformamos em um inline-block, 
+  pois permite pegar margem sem ultrapassar o conteúdo */
+  margin-bottom: 0.8rem;
+}
+
+button {
+  width: 100%;
+  height: 50px;
+  padding: 0;
+
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  background-color: var(--green);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--light-green);
+}
+
+.button.new {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+}
+
+.button.cancel {
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 0.25rem;
+
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0.6;
+}
+
+.button.cancel:hover {
+  opacity: 1;
+}
+
+/* ========= BALANCE ========= */
+
+#balance {
+  margin-top: -8rem;
+}
+
+#balance h2 {
+  color: white;
+}
+
+/* ========= CARDS ========== */
+
+.card {
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 0.25rem;
+
+  margin-bottom: 2rem;
+  color: var(--dark-blue);
+}
+
+.card h3 {
+  font-weight: normal;
+  font-size: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card p {
+  font-size: 2rem;
+  line-height: 3rem;
+
+  margin-top: 1rem;
+}
+
+.card.total {
+  background: var(--green);
+  color: white;
+}
+
+/* ========= TABLE ========= */
+
+#data-table {
+  width: 100%;
+  /*  Border-Spacing trabalha os espaços nos eixos (vertical e horizontal) */
+  border-spacing: 0 0.5rem;
+  color: #969cb3;
+}
+
+table tbody tr {
+  opacity: 0.7;
+}
+
+table tbody tr:hover {
+  opacity: 1;
+}
+
+table tbody td {
+  background: white;
+
+  padding: 1rem 2rem;
+}
+
+table thead th {
+  background: white;
+
+  /* Não trabalhou a opacidade, preferiu colocar uma fonte mais leve
+  opacity: 0.6; */
+
+  font-weight: normal;
+
+  padding: 1rem 2rem;
+  text-align: left;
+}
+
+table thead tr th:first-child,
+table tbody tr td:first-child {
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table thead tr th:last-child,
+table tbody tr td:last-child {
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+td.description {
+  color: var(--dark-blue);
+}
+
+td.income {
+  color: #12a454;
+}
+
+td.expense {
+  color: #e92929;
+}
+
+/* ========= TRANSACTION ========= */
+
+#transaction {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* ========= MODAL ========= */
+
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Opacity: 0 - Fica transparente mas a div continua ocupando o espaço
+  com o Visibility: hidden ele tira a div do html*/
+  opacity: 0;
+  visibility: hidden;
+  /* Com o position ele se sobrepões, mas está atrapalhando o modal,
+  então utilizando o posicionamento Z, ele sobe camadas deixando de atrapalhar */
+  z-index: 999;
+}
+
+/* Classe criada no CSS para adicionar pelo classList no JS 
+Quando ativo ele aplica essas configurações abaixo*/
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+/* Com o padding não foi preciso fazer o espaçamento do modal, pois ele vai se 
+adaptando ao conteúdo. A medida que o conteúdo cresce, o padding empurra a caixa */
+.modal {
+  background: #f0f2f5;
+  padding: 2.4rem;
+
+  /* Para manter o modal responsivo */
+  width: 90%;
+  max-width: 500px;
+
+  position: relative;
+  z-index: 1;
+}
+
+/* ========= FORM ========= */
+
+.form h2 {
+  margin-top: 0;
+}
+
+input {
+  border: none;
+  border-radius: 0.2rem;
+
+  padding: 0.8rem;
+  width: 100%;
+}
+
+.input-group {
+  margin-top: 0.8rem;
+}
+
+.input-group small {
+  opacity: 0.4;
+}
+
+.input-group.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-group.actions .button,
+.input-group.actions button {
+  width: 48%;
+}
+
+/* ========= FOOTER ========= */
+
+footer p {
+  /* margin-top: 5rem; */
+  padding: 4rem 0 2rem;
+  color: var(--dark-blue);
+  opacity: 0.6;
+
+  text-align: center;
+}
+
+/* ========= RESPONSIVE ========= */
+
+/* Quando a largurta mínima da tela atingir 800px ( a partir de 800px), aplique as regras abaixo */
+@media (min-width: 800px) {
+  html {
+    font-size: 87.5%;
+  }
+
+  #balance {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Posso também passar os argumentos de (3, 1fr), significa repetir 3x uma fração*/
+    gap: 2rem;
+  }
+
+  #data-table {
+    width: 100%;
+  }
+}

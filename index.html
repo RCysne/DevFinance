@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>dev.finance$</title>
+  </head>
+
+  <body>
+    <header>
+      <!-- <h1 id="logo">dev.finance$</h1> ----   Trocando pela imagem-->
+      <img src="./assets/logo.svg" alt="Logo Dev Finance" />
+    </header>
+    <main class="container">
+      <section id="balance">
+        <h2 class="sr-only">Balanço</h2>
+        <div class="card">
+          <h3>
+            <span> Entradas</span>
+            <img src="./assets/income.svg" alt="Imagem de Entradas" />
+          </h3>
+          <p id="incomeDisplay">R$ 5.000,00</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span>Saídas</span>
+            <img src="./assets/expense.svg" alt="Imagem de Saídas" />
+          </h3>
+          <p id="expenseDisplay">R$ 2.000,00</p>
+        </div>
+        <div class="card total">
+          <h3>
+            <span>Total</span>
+            <img src="./assets/total.svg" alt="Imagem do Total" />
+          </h3>
+          <p id="totalDisplay">R$ 3.000,00</p>
+        </div>
+      </section>
+      <section id="transaction">
+        <h2 class="sr-only">Transações</h2>
+
+        <!-- Acessando a função dentro do objeto - onclick="modal.open()"-->
+        <a href="#" onclick="modal.open()" class="button new"
+          >+ Nova Transação</a
+        >
+
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Data</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Com o transactionContainer no JS
+              
+              O comando agora passou a ser pelo JS
+              Aqui os dados foram retirados, deixando o JS
+              responsável pela adição e pela subtração dos dados
+              
+              
+              <tr>
+              <td class="description">Luz</td>
+              <td class="expense">- R$ 500,00</td>
+              <td class="date">23/01/2021</td>
+              <!-- Inserido mais uma coluna para receber a imagem do botão-->
+            <!-- <td><img src="./assets/minus.svg" alt="Remover Transação" /></td>
+            </tr>
+            <tr>
+              <td class="description">Website</td>
+              <td class="income">R$ 5.000,00</td>
+              <td class="date">23/01/2021</td>
+              <td><img src="./assets/minus.svg" alt="Remover transação" /></td>
+            </tr>
+            <tr>
+              <td class="description">Internet</td>
+              <td class="expense">- R$ 200,00</td>
+              <td class="date">23/01/2021</td>
+              <td><img src="./assets/minus.svg" alt="Remover transação" /></td>
+            </tr> -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <!-- =======  MODAL-OVERLAY ======== -->
+
+    <!-- Caixa com o fundo preto -->
+    <!-- Classe active adicionada pelo CSS para abrir o modal-->
+    <div class="modal-overlay">
+      <!-- Caixa de abertura -->
+      <div class="modal">
+        <div class="form">
+          <h2>Nova Transação</h2>
+          <form action="">
+            <!-- Cada input dividido em uma div -->
+
+            <!-- =======  DESCRIPTION ======== -->
+            <div class="input-group">
+              <!-- O label é uma marcação para explicar o que está no input -->
+              <!-- Usando o screen reader (sr-only) para descrever o input (acessibilidade) -->
+              <label class="sr-only" for="description"></label>
+              <input
+                type="text"
+                name="description"
+                id="description"
+                placeholder="Descrição"
+              />
+            </div>
+
+            <!-- =======  AMOUNT ======== -->
+            <div class="input-group">
+              <label class="sr-only" for="amount">Valor</label>
+              <input
+                type="number"
+                step="0.01"
+                name="amount"
+                id="amount"
+                placeholder="0,00"
+              />
+              <!-- Small é uma tag que já deixa o texto pequeno -->
+              <small class="help"
+                >Use o sinal - (negativo) para despesas e , (vírgula) para casas
+                decimais
+              </small>
+            </div>
+
+            <!-- =======  DATE ======== -->
+            <div class="input-group">
+              <label class="sr-only" for="date"></label>
+              <input type="date" name="date" id="date" />
+            </div>
+
+            <!-- =======  BUTTONS ======== -->
+            <div class="input-group actions">
+              <!-- Quando clicar, redirecionar para outra página 
+              o .modal é para acessar dentro do objeto modal a função close-->
+              <a href="#" class="button cancel" onclick="modal.close()"
+                >Cancelar</a
+              >
+              <!-- O primeiro botão que o HTML encontrar é o botão de envio, quando tiver 
+                mais de um botão de envio, escolher o type submit para o de envio -->
+              <button>Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>2021 - dev.finance$</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
